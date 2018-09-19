@@ -15,7 +15,7 @@
   "dependencies": [],
   "screenshots": [],
   "features": "TranslationFile",
-  "showMyCode": true,
+  "showMyCode": false,
   "target": "Internal",
   "platform": "11.0.0.0",
   "application": "11.0.0.0",
