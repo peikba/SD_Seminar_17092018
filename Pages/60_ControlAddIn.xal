@@ -1,0 +1,49 @@
+// The controladdin type declares the new add-in.
+
+controladdin CustomersPerCountryChart
+{
+    // The Scripts property can reference both external and local scripts.
+    Scripts = 'https://code.jquery.com/jquery-2.1.0.min.js',
+              'js/main.js';
+
+    // The StartupScript is a special script that the webclient calls once the page is loaded.
+    StartupScript = 'js/chart.js';
+
+    // Images and StyleSheets can be referenced in a similar fashion.
+
+    // The layout properties define how control add-in are displayed on the page.
+    VerticalShrink = true;
+
+    // The procedure declarations specify what JavaScript methods could be called from AL.
+    // In JavaScript code, there should be a global function LoadData(data) {}
+    procedure LoadData(Data : JsonArray);
+
+    // The event declarations specify what callbacks could be raised from JavaScript by using the webclient API:
+    // Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('CountryClicked', [{country: 'M}])
+    event CountryClicked(Country: JsonObject);
+}
+
+page 123456760 CustomersMapPage
+{
+    layout
+    {
+        area(Content)
+        {
+            // The control add-in can be placed on the page using usercontrol keyword.
+
+            usercontrol(ControlName; CustomersPerCountryChart)
+            {
+                // The control add-in events can be handled by defining a trigger with a corresponding name.
+
+                trigger CountryClicked(Country : JsonObject)
+                var Data : JsonArray;
+                begin
+
+                    // The control add-in methods can be invoked via a reference to the usercontrol.
+
+                    CurrPage.ControlName.LoadData(Data);
+                end;                  
+            }
+        }
+    }
+}

@@ -18,7 +18,6 @@ page 123456710 "CSD Seminar Registration"
             {
                 field("No."; "No.")
                 {
-                    QuickEntry=true;
                     AssistEdit = true;
                     trigger OnAssistEdit();
                     begin
@@ -28,46 +27,36 @@ page 123456710 "CSD Seminar Registration"
                 }
                 field("Starting Date"; "Starting Date")
                 {
-                    QuickEntry=true;
                 }
                 field("Seminar No."; "Seminar No.")
-                {QuickEntry=true;
+                {
                 }
                 field("Seminar Name"; "Seminar Name")
                 {
-                    QuickEntry=false;
                 }
                 field("Instructor Resource No."; "Instructor Resource No.")
                 {
-                    QuickEntry=true;
                 }
                 field("Instructor Name"; "Instructor Name")
                 {
-                    QuickEntry=false;
                 }
                 field("Posting Date"; "Posting Date")
                 {
-                    QuickEntry=false;
                 }
                 field("Document Date"; "Document Date")
                 {
-                    QuickEntry=false;
                 }
                 field(Status; Status)
                 {
-                    QuickEntry=false;
                 }
                 field(Duration; Duration)
                 {
-                    QuickEntry=false;
                 }
                 field("Minimum Participants"; "Minimum Participants")
                 {
-                    QuickEntry=false;
                 }
                 field("Maximum Participants"; "Maximum Participants")
                 {
-                    QuickEntry=false;
                 }
             }
             part(SeminarRegistrationLines; "CSD Seminar Reg. Subpage")
@@ -79,35 +68,27 @@ page 123456710 "CSD Seminar Registration"
             {
                 field("Room Resource No."; "Room Resource No.")
                 {
-                    Importance=Promoted;
                 }
                 field("Room Name"; "Room Name")
                 {
-                    Importance=Promoted;
                 }
                 field("Room Address"; "Room Address")
                 {
-                    Importance=Additional;
                 }
                 field("Room Address 2"; "Room Address 2")
                 {
-                    Importance=Additional;
                 }
                 field("Room Post Code"; "Room Post Code")
                 {
-                    Importance=Additional;
                 }
                 field("Room City"; "Room City")
                 {
-                    Importance=Additional;
                 }
                 field("Room Country/Reg. Code"; "Room Country/Reg. Code")
                 {
-                    Importance=Additional;
                 }
                 field("Room County"; "Room County")
                 {
-                    Importance=Additional;
                 }
             }
             group(Invoicing)
@@ -180,6 +161,20 @@ page 123456710 "CSD Seminar Registration"
                 ShortcutKey = F9;
                 RunObject = codeunit "CSD Seminar-Post (Yes/No)";
             }
+            action("&Print")
+            {
+                Caption = '&Print';
+                Image = Print;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                trigger OnAction();
+                var
+                    SeminarReportSelection : Record "CSD Seminar Report Selections";
+                begin
+                    SeminarReportSelection.PrintReportSelection(SeminarReportSelection.Usage::Registration,Rec);
+                end;
+            }            
         }
     }
 }

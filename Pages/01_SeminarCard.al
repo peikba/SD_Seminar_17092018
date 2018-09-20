@@ -123,7 +123,14 @@ page 123456701 "CSD Seminar Card"
                 PromotedCategory=New;
 
             }
+            action(ExportSeminar)
+            {
+                Caption='Export Seminars';
+                RunObject=xmlport "Export Seminars";
+                image=ExportAttachment;
+            }
         }
         // << Lab 8-2
+
     }
 }
